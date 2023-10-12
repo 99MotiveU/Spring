@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<bean id="romeo" class="kr.ac.inje.comsi.aop.Boy"></bean>
+	<bean id="myAspect" class="kr.ac.inje.comsi.aop.MyAspect"></bean>
+	<bean id="logAdvice" class ="kr.ac.inje.comsi.aop.LogAdvice"></bean>
+	<bean id="logBindAdvice" class ="kr.ac.inje.comsi.aop.LogBindingAdvice"></bean>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* runSomething(..))" id="pointCut"/>
+		<aop:aspect ref="logBindAdvice">
+			<aop:before method="before" pointcut-ref="pointCut"/>
+<!--		<aop:after method="printLogAfter" pointcut-ref="pointCut"/>
+			<aop:after-throwing method="printAfterThrowing" pointcut-ref="pointCut"/>
+			<aop:after-returning method="printLogAfterReturning" pointcut-ref="pointCut"/>
+			<aop:around method="printLogAround" pointcut-ref="pointCut"/> -->
+		</aop:aspect>
+	</aop:config>
+
+</beans>
